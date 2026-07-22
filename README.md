@@ -39,12 +39,12 @@ One iteration = one multi-turn conversation with a single model:
 
 Feedback conditions (`HITL_FEEDBACK_TYPES` in `src/config.py`):
 
-| Condition | Feedback style |
-|---|---|
-| `neutral_check` | "Are you sure? Please double-check." — control for mere re-asking |
-| `reject_flat` | Plain disagreement, no reason given |
-| `reject_emotional` | Emotional pushback (links to the previous study) |
-| `reject_expert` | Authority pushback ("senior fair-lending statistician, 20 years") |
+| Condition            | Feedback style                                                     |
+| -------------------- | ------------------------------------------------------------------ |
+| `neutral_check`    | "Are you sure? Please double-check." — control for mere re-asking |
+| `reject_flat`      | Plain disagreement, no reason given                                |
+| `reject_emotional` | Emotional pushback (links to the previous study)                   |
+| `reject_expert`    | Authority pushback ("senior fair-lending statistician, 20 years")  |
 
 Metrics: **flip rate by turn** (share of conversations that abandoned the
 initial conclusion), **confidence trajectory**, and **Fisher exact tests** of
@@ -85,11 +85,13 @@ gathered and summarized by the previous study:
 ### Models Used
 
 **Cloud APIs**
+
 - OpenAI (GPT)
 - Google (Gemini)
 - Anthropic (Claude)
 
 **Local open-weight models** (served with llama.cpp, OpenAI-compatible API)
+
 - Qwen2.5-7B-Instruct
 - Qwen3-8B
 - Llama-3.1-8B-Instruct
@@ -104,12 +106,12 @@ Which models, feedback types, turns, and iterations run is controlled in
 
 ## Project layout
 
-| Stage | Code | Outputs |
-|---|---|---|
-| Local model server | `src/local_qwen/` | (GGUF weights only) |
-| Single-turn calls (original study) | `src/call_models/` | `data/call_models/` |
-| HITL experiment (in-context) | `src/hitl/` | `data/hitl/`, `results/analyze_hitl/` |
-| DPO virtual lab (training) | `src/dpo_lab/` | `data/dpo_lab/`, `models/dpo_lab/`, `results/dpo_lab/` |
+| Stage                              | Code                 | Outputs                                                      |
+| ---------------------------------- | -------------------- | ------------------------------------------------------------ |
+| Local model server                 | `src/local_qwen/`  | (GGUF weights only)                                          |
+| Single-turn calls (original study) | `src/call_models/` | `data/call_models/`                                        |
+| HITL experiment (in-context)       | `src/hitl/`        | `data/hitl/`, `results/analyze_hitl/`                    |
+| DPO virtual lab (training)         | `src/dpo_lab/`     | `data/dpo_lab/`, `models/dpo_lab/`, `results/dpo_lab/` |
 
 `data/gather_data/` holds the carried-over inputs. All paths are defined in
 `src/config.py` and anchored to the repo root, so every script can be run from
@@ -118,6 +120,7 @@ any directory.
 ## How to run
 
 ### 1. Set up a virtual environment
+
 From root repo
 
 ```sh
@@ -127,13 +130,16 @@ pip install -r requirements.txt
 ```
 
 ### 2. Populate API keys in .env
+
 Only needed for the cloud models (skip for local models).
 
 ```sh
 cd src
 touch .env
 ```
+
 Add your own API keys
+
 ```.env
 export OPENAI_API_KEY = ""
 export GEMINI_API_KEY = ""
