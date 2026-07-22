@@ -1,0 +1,9 @@
+numpy
+pandas
+matplotlib
+scipy
+statsmodels
+python-dotenv
+openai
+anthropic
+google-genai
