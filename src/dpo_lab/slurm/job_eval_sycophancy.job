@@ -1,0 +1,31 @@
+#!/bin/bash
+# NOT THE DEFAULT PATH — held in reserve. Evals run on the desktop PC;
+# only submit this to Discovery if that is explicitly decided later.
+#
+# Sycophancy eval for one checkpoint on Discovery.
+# Usage:  sbatch job_eval_sycophancy.job base
+#         sbatch job_eval_sycophancy.job human-25pct
+
+#SBATCH --job-name=dpo_eval
+#SBATCH --time=6:00:00
+#SBATCH --partition=gpu
+#SBATCH --account=jonmay_1426
+#SBATCH --gres=gpu:a100:1
+#SBATCH --cpus-per-task=4
+#SBATCH --mem-per-cpu=16GB
+
+# ---- adjust these paths to where things live on Discovery ----
+REPO=/project2/jonmay_1426/syokoi/llm-sycophancy-vs-hitl
+VENV=/project2/jonmay_1426/syokoi/env_general
+
+TAG=${1:?usage: sbatch job_eval_sycophancy.job <base|arm-NNpct>}
+
+source "$VENV/bin/activate"
+module load cuda
+
+cd "$REPO/src/dpo_lab"
+if [ "$TAG" = "base" ]; then
+    python eval_sycophancy.py --tag base
+else
+    python eval_sycophancy.py --tag "$TAG" --adapter "$REPO/models/dpo_lab/$TAG"
+fi

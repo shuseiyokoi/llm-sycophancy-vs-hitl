@@ -192,3 +192,6 @@ src/local_qwen/llama.cpp/
 # EXCEPT the raw HMDA download — 384 MB, over GitHub's 100 MB limit
 !*.csv
 hmda_CA_2024.csv
+
+# DPO virtual lab checkpoints (large; regenerate with src/dpo_lab/train_dpo.py)
+models/dpo_lab/

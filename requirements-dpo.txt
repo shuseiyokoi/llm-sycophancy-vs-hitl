@@ -1,0 +1,11 @@
+# Extra dependencies for the DPO virtual lab (src/dpo_lab/).
+# Install on the training machine (desktop PC with an NVIDIA GPU), on top of requirements.txt:
+#   pip install -r requirements-dpo.txt
+torch
+transformers>=4.45
+trl>=0.12
+peft>=0.13
+datasets>=2.20
+accelerate>=0.34
+sentencepiece
+protobuf
